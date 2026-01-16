@@ -41,10 +41,12 @@ public func withDependencies<R>(
 /// ```
 ///
 /// - Parameters:
+///   - isolation: 调用者的隔离上下文，默认为当前隔离域
 ///   - updateValuesForOperation: 用于修改依赖值的闭包
 ///   - operation: 使用修改后依赖值的异步操作闭包
 /// - Returns: operation 闭包的返回值
 public func withDependencies<R>(
+    isolation: isolated (any Actor)? = #isolation,
     _ updateValuesForOperation: (inout DependencyValues) -> Void,
     operation: () async throws -> R
 ) async rethrows -> R {
