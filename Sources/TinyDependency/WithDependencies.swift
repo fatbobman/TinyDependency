@@ -20,7 +20,7 @@ import Foundation
 /// - Returns: operation 闭包的返回值
 public func withDependencies<R>(
     _ updateValuesForOperation: @Sendable (inout DependencyValues) -> Void,
-    operation: @Sendable () throws -> R
+    operation: () throws -> R
 ) rethrows -> R {
     var dependencies = DependencyValues.current.copy()
     updateValuesForOperation(&dependencies)
@@ -46,7 +46,7 @@ public func withDependencies<R>(
 /// - Returns: operation 闭包的返回值
 public func withDependencies<R>(
     _ updateValuesForOperation: @Sendable (inout DependencyValues) -> Void,
-    operation: @Sendable () async throws -> R
+    operation: () async throws -> R
 ) async rethrows -> R {
     var dependencies = DependencyValues.current.copy()
     updateValuesForOperation(&dependencies)
