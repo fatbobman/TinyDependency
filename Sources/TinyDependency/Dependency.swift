@@ -14,16 +14,16 @@ import Foundation
 /// ```
 @propertyWrapper
 public struct Dependency<Value: Sendable>: @unchecked Sendable {
-    private let keyPath: KeyPath<DependencyValues, Value>
+  private let keyPath: KeyPath<DependencyValues, Value>
 
-    /// 初始化 Dependency
-    /// - Parameter keyPath: 指向 DependencyValues 中依赖的 KeyPath
-    public init(_ keyPath: KeyPath<DependencyValues, Value>) {
-        self.keyPath = keyPath
-    }
+  /// 初始化 Dependency
+  /// - Parameter keyPath: 指向 DependencyValues 中依赖的 KeyPath
+  public init(_ keyPath: KeyPath<DependencyValues, Value>) {
+    self.keyPath = keyPath
+  }
 
-    /// 获取依赖值
-    public var wrappedValue: Value {
-        DependencyValues.current[keyPath: keyPath]
-    }
+  /// 获取依赖值
+  public var wrappedValue: Value {
+    DependencyValues.current[keyPath: keyPath]
+  }
 }

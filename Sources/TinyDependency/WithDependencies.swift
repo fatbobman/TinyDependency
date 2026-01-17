@@ -19,14 +19,14 @@ import Foundation
 ///   - operation: 使用修改后依赖值的操作闭包
 /// - Returns: operation 闭包的返回值
 public func withDependencies<R>(
-    _ updateValuesForOperation: (inout DependencyValues) -> Void,
-    operation: () throws -> R
+  _ updateValuesForOperation: (inout DependencyValues) -> Void,
+  operation: () throws -> R
 ) rethrows -> R {
-    var dependencies = DependencyValues.current.copy()
-    updateValuesForOperation(&dependencies)
-    return try DependencyValues.$_current.withValue(dependencies) {
-        try operation()
-    }
+  var dependencies = DependencyValues.current.copy()
+  updateValuesForOperation(&dependencies)
+  return try DependencyValues.$_current.withValue(dependencies) {
+    try operation()
+  }
 }
 
 /// 异步版本的 withDependencies
@@ -46,13 +46,13 @@ public func withDependencies<R>(
 ///   - operation: 使用修改后依赖值的异步操作闭包
 /// - Returns: operation 闭包的返回值
 public func withDependencies<R>(
-    isolation: isolated (any Actor)? = #isolation,
-    _ updateValuesForOperation: (inout DependencyValues) -> Void,
-    operation: () async throws -> R
+  isolation: isolated (any Actor)? = #isolation,
+  _ updateValuesForOperation: (inout DependencyValues) -> Void,
+  operation: () async throws -> R
 ) async rethrows -> R {
-    var dependencies = DependencyValues.current.copy()
-    updateValuesForOperation(&dependencies)
-    return try await DependencyValues.$_current.withValue(dependencies) {
-        try await operation()
-    }
+  var dependencies = DependencyValues.current.copy()
+  updateValuesForOperation(&dependencies)
+  return try await DependencyValues.$_current.withValue(dependencies) {
+    try await operation()
+  }
 }
