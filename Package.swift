@@ -6,31 +6,32 @@ import PackageDescription
 let package = Package(
     name: "TinyDependency",
     platforms: [
-        .iOS(.v16),
-        .macOS(.v13),
-        .tvOS(.v16),
-        .watchOS(.v9),
-        .visionOS(.v1)
+        .iOS(.v15),
+        .macOS(.v12),
+        .tvOS(.v15),
+        .watchOS(.v8),
+        .visionOS(.v1),
     ],
     products: [
         .library(
             name: "TinyDependency",
-            targets: ["TinyDependency"]
-        )
+            targets: ["TinyDependency"],
+        ),
     ],
     targets: [
         .target(
             name: "TinyDependency",
             swiftSettings: [
-                .enableUpcomingFeature("StrictConcurrency")
-            ]
+                .swiftLanguageMode(.v6),
+                .enableUpcomingFeature("InternalImportsByDefault"),
+            ],
         ),
         .testTarget(
             name: "TinyDependencyTests",
             dependencies: ["TinyDependency"],
             swiftSettings: [
-                .enableUpcomingFeature("StrictConcurrency")
-            ]
-        )
-    ]
+                .swiftLanguageMode(.v6),
+            ],
+        ),
+    ],
 )
